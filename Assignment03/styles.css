@@ -1,0 +1,93 @@
+
+body{
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    font-family: "Roboto";
+    margin: 0;
+    padding: 0;
+    font-size: 15px;
+}
+.assignment3{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    gap: 1rem;
+}
+.button-wrapper{
+    flex: 0.6;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem 0;
+    box-sizing: border-box;
+    align-items: center;
+    padding: 1rem;
+    box-shadow: 1px 1px 8px gray;
+}
+.button-wrapper button{
+    height: 50px;
+    width: 100%;
+    padding: 0 2rem;
+    border: none;
+    background-color: #03a9f4;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .25s;
+    font-size: 15px;
+    color: #131313;
+}
+.button-wrapper button:hover{
+    transform: scale(1.05);
+    background-color: rgb(0, 140, 233);
+}
+.content{
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+    gap: 1rem;
+}
+.title{
+    width: 80%;
+    background-color: #00e22c;
+    text-transform: uppercase;
+    border-radius: 5px;
+    text-align: center;
+    margin: 0 auto;
+}
+.render{
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.student{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 2rem;
+    background-color: rgb(211, 255, 205);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .25s;
+}
+.student p{
+    flex: 1;
+}
+.student p:nth-child(1) {
+    flex: 1.5;
+}
+.student p:nth-child(2) {
+    flex: 1.7;
+}
+.student p:nth-child(3) {
+    flex: 1.3;
+}
+.student:hover{
+    transform: scale(1.05);
+    background-color: rgb(116, 240, 100);
+}
