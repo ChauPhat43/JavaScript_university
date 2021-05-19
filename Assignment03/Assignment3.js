@@ -1,8 +1,5 @@
 var students = [];
 const buttons = document.querySelectorAll(".filter");
-// console.log(buttons)
-
-
 
 class Student {
     constructor(name, mark, gender, subjects) {
