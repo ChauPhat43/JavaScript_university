@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basic Exercises 03</title>
+</head>
+<body>
+    <div class="ex2">
+        <form action="#">
+            <h3>03 Số hoàn hảo là số nguyên dương bằng tổng các ước thực sự của nó.
+                Ví dụ: 6=1+2+3. Viết chương trình có sử dụng hàm kiểm tra n (nhập từ bàn phím)
+                có phải số hoàn hảo không ?</h3>
+            <input type="number" id="checkEx2">
+            <button type="submit" class="submitEx2">Kiểm tra</button>
+            <div class="resEx2"></div>
+        </form>
+    </div>
+    <script>
+        var resEx2 = document.querySelector(".resEx2");
+        var buttonEx2 = document.querySelector("button.submitEx2");
+        var checkEx2 = true
+        var number = 0;
+        var tong = 0;
+
+        buttonEx2.addEventListener("click", function(e) {
+            e.preventDefault();
+            var n = document.getElementById("checkEx2");
+            var number = n.value;
+            tong = 0;
+            for (let i = 1; i < number; i++) {
+                if (number % i == 0)  {
+                    tong += i
+                }
+            }
+            console.log("Tong la: " ,tong);
+            console.log("Number là: ",number)
+            if (tong === +number) {
+                resEx2.innerHTML = number + ' là số hoàn hảo'
+            } else {
+                resEx2.innerHTML = number + ' không là số hoàn hảo'
+            }
+        })
+
+        
+    </script>
+</body>
+</html>

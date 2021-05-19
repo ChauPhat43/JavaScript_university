@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basic Exercises</title>
+    <style>
+        * {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .body {
+            width: 600px;
+            background-color: aliceblue;
+            margin: 0 auto;
+            padding: 1rem 1rem;
+        }
+        .res {
+            margin-top: 10px;
+        }
+        input[type="number"], input[type="text"] {
+            margin-right: 10px;
+            outline: none;
+        }
+        input {
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div class="ex1">
+            <h3>01. Viết chương trình có sử dụng hàm kiểm tra n (nhập từ bàn phím) có phải số nguyên tố không ?</h3>
+            <input type="number" id="checkEx1">
+            <button type="submit" class="submitEx1">Kiểm tra</button>
+            <div class="resEx1 res"></div>
+        </div>
+    
+        <div class="ex2">
+            <form action="#">
+                <h3>03. Viết chương trình có sử dụng hàm kiểm tra n (nhập từ bàn phím)
+                    có phải số hoàn hảo không ?</h3>
+                <input type="number" id="checkEx2">
+                <button type="submit" class="submitEx2">Kiểm tra</button>
+                <div class="resEx2 res"></div>
+            </form>
+        </div>
+    
+        <div class="ex5">
+            <form action="#">
+                <h3>05. Viết chương trình nhập số nguyên dương a và kiểm tra a có phải là số tự đối xứng không?</h3>
+                <input type="text" id="checkEx5">
+                <button type="submit" class="submitEx5">Kiểm tra</button>
+                <div class="resEx3 res"></div>
+            </form>
+        </div>
+    
+        <div class="ex16">
+            <form action="#">
+                <h3>Viết chương trình nhập vào số nguyên N và sau đó in ra số đảo của N? 
+                Ví dụ: N=12345. In ra 54321.</h3>
+                <input type="number" id="checkEx16">
+                <button type="submit" class="submitEx16">Kiểm tra</button>
+                <div class="resEx16 res"></div>
+            </form>
+        </div>
+    </div>
+    <script>
+        var n = document.getElementById("checkEx1");
+        var resEx1 = document.querySelector(".resEx1");
+        var button = document.querySelector("button.submitEx1");
+        var checkEx1 = true
+        var number;
+
+        n.addEventListener("change", function(e) {
+            number = e.target.value;
+        })
+
+        button.addEventListener("click", function(e) {
+            e.preventDefault();
+            for (let i = 2; i < Math.sqrt(number); i++) {
+                if (number % i == 0)  {
+                    checkEx1 = false
+                }
+            }
+            if (checkEx1) {
+                resEx1.innerHTML = number + ' là số nguyên tố'
+            } else {
+                resEx1.innerHTML = number + ' không là số nguyên tố'
+            }
+        })
+
+        var resEx2 = document.querySelector(".resEx2");
+        var buttonEx2 = document.querySelector("button.submitEx2");
+        var checkEx2 = true
+        var number = 0;
+        var tong = 0;
+
+        buttonEx2.addEventListener("click", function(e) {
+            e.preventDefault();
+            var n = document.getElementById("checkEx2");
+            var number = n.value;
+            tong = 0;
+            for (let i = 1; i < number; i++) {
+                if (number % i == 0)  {
+                    tong += i
+                }
+            }
+            console.log("Tong la: " ,tong);
+            console.log("Number là: ",number)
+            if (tong === +number) {
+                resEx2.innerHTML = number + ' là số hoàn hảo'
+            } else {
+                resEx2.innerHTML = number + ' không là số hoàn hảo'
+            }
+        })
+
+
+        var resEx3 = document.querySelector(".resEx3");
+        var buttonEx5 = document.querySelector("button.submitEx5");
+        var checkEx5 = true;
+        var number = 0;
+        var tong = 0;
+
+        buttonEx5.addEventListener("click", function(e) {
+            e.preventDefault();
+            var n = document.getElementById("checkEx5");
+            var mang = n.value.split("");
+            console.log(mang);
+            var number = mang.length;
+            console.log(number);
+            for (let i = 0; i < Math.floor(number/2); i++) {
+                console.log(mang[i] + " so với " + mang[number - 1 - i]);
+                if (mang[i] != mang[number - 1 - i])  {
+                    checkEx5 = false;
+                }
+                console.log(checkEx5);
+            }
+            if (checkEx5) {
+                resEx3.innerHTML = n.value + ' là chuỗi đối xứng'
+            } else {
+                resEx3.innerHTML = n.value + ' là chuỗi bất đối xứng'
+            }
+        })
+
+        var resEx16 = document.querySelector(".resEx16");
+        var buttonEx16 = document.querySelector("button.submitEx16");
+        var checkEx16 = true;
+        var number = 0;
+        var tong = 0;
+        var reversedString = "";
+
+        buttonEx16.addEventListener("click", function(e) {
+            e.preventDefault();
+            var n = document.getElementById("checkEx16");
+            var mang = n.value.split("");
+            console.log(mang);
+            var mangDaoNguoc = [];
+            var number = mang.length;
+            var count = 0;
+            for (let i = number-1; i >= 0; i--) {
+                mangDaoNguoc[count] = mang[i];
+                count++;
+            }
+            for (let i = 0; i < mangDaoNguoc.length; i++) {
+                reversedString += mangDaoNguoc[i]
+            }
+            resEx16.innerHTML = reversedString;
+        })
+    </script>
+</body>
+</html>

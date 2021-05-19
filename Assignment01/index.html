@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Buổi 2</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>BMI Calculator</h1>
+        <form class="form">
+            <div class="line">
+                <label for="">Height: (in cm)</label>  
+                <input type="number" class="weight">
+            </div>
+            <div class="line">
+                <label for="">Weight: (in kg)</label> <br>    
+                <input type="number" class="height">
+            </div>
+            <input type="submit" value="Calculate">
+        </form>
+        <div class="result1"></div>
+        <div class="result2"></div>
+    </div>
+    <script>
+        var button = document.querySelector("input[type='submit']");
+        var weight = document.querySelector("input.weight");
+        var height = document.querySelector("input.height");
+        var result1 = document.querySelector(".result1");
+        var result2 = document.querySelector(".result2");
+        var weight1 = 0;
+        var height1 = 0;
+        var bmi = 0;
+
+        console.log(button);
+        button.addEventListener("click", function(e) {
+            e.preventDefault();
+            console.log(weight1);
+            console.log(height1);
+
+            bmi = (weight1 / (height1*height1/10000));
+            if (bmi < 18.5) {
+                result1.innerHTML = "Phân loại: Gầy";
+                result2.innerHTML = "Nguy cơ phát triển bệnh: Thấp";
+            }
+            if ((bmi >= 18.5) && (bmi <= 24.9)) {
+                result1.innerHTML = "Phân loại: Bình thường";
+                result2.innerHTML = "Nguy cơ phát triển bệnh: Trung bình";
+            }
+            if ((bmi >= 25) && (bmi <= 29.9)) {
+                result1.innerHTML = "Phân loại: Hơi béo";
+                result2.innerHTML = "Nguy cơ phát triển bệnh: Cao";
+            }
+            if ((bmi >= 30) && (bmi <= 34.9)) {
+                result1.innerHTML = "Phân loại: Béo phì cấp độ 1";
+                result2.innerHTML = "Nguy cơ phát triển bệnh: Cao";
+            }
+            if ((bmi >= 35) && (bmi <= 39.9)) {
+                result1.innerHTML = "Phân loại: Béo phì cấp độ 2";
+                result2.innerHTML = "Nguy cơ phát triển bệnh: Cao";
+            }
+            if (bmi >= 40) {
+                result1.innerHTML = "Phân loại: Béo phì cấp độ 3";
+                result2.innerHTML = "Nguy cơ phát triển bệnh: Cao";
+            }
+        })
+
+        weight.addEventListener("change", function(e) {
+            weight1 = e.target.value;
+        })
+        
+        height.addEventListener("change", function(e) {
+            height1 = e.target.value;
+        })
+        
+        console.log(weight.target.value);
+    </script>
+</body>
+</html>

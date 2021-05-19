@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 02</title>
+    <link rel="stylesheet" href="Assignment2-styles.css">
+</head>
+<body>
+    <div class="khung">
+        <form>
+            <div class="content">
+                <label for="">Số tiền vay</label>
+                <input type="number" id="soTien" value="">
+                <p>VND</p>
+            </div>
+            <div class="content">
+                <label for="">Thời gian vay</label>
+                <input type="number" id="thoiGianVay" value="">
+                <p>tháng</p>
+            </div>
+            <div class="content">
+                <label for="">Lãi suất</label>
+                <input type="number" id="laiSuat" value="">
+                <p>% / năm</p>
+            </div>
+            <div class="content">
+                <label for="">Ngày giải ngân</label>
+                <input type="date" id="ngayGiaiNgan" value="">
+                <p>Lịch</p>
+            </div>
+            <button id="submit">Tính</button>
+            <br>
+            <table id="myTable">
+                <thead>
+                  <tr>
+                    <th class="column1">Kỳ trả nợ</th>
+                    <th class="column2"></th>
+                    <th class="column3">Số gốc còn lại</th>
+                    <th class="column4">Gốc</th>
+                    <th class="column5">Lãi</th>
+                    <th class="column6">Tổng gốc + lãi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  </tr>
+                </tbody>
+              </table>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        //lấy dữ liệu nút tính
+        var submit = document.getElementById("submit");
+        var displayAlready = true;
+
+        submit.addEventListener("click", (e) => {
+            // ngăn load lại trang
+            e.preventDefault();
+            if (displayAlready) {
+                //lấy dữ liệu các nút trong form HTML
+                var soTienVayInput = document.getElementById("soTien");
+                var ngayGiaiNganInput = document.getElementById("ngayGiaiNgan");
+                var thoiGianVayInput = document.getElementById("thoiGianVay");
+                var laiSuatInput = document.getElementById("laiSuat");
+
+                if (soTienVayInput.value == "" || ngayGiaiNganInput.value == "" || thoiGianVayInput.value == "" || laiSuatInput.value == "") {
+                    alert("Bạn phải nhập đủ tất cả các trường!");
+                    location.reload();
+                }
+                //tạo biến để tính toán trong JS
+                var thoiGianVay = thoiGianVayInput.value;
+                var goc = +soTienVayInput.value;
+                var gocConLai = goc;
+                var gocHangThang = Math.round(goc/thoiGianVay);
+                var laiSuat = (laiSuatInput.value/100)/thoiGianVay;
+                // console.log(laiSuat + " type = " + typeof(laiSuat));
+                var newDate = new Date(ngayGiaiNganInput.value);
+
+                var laiPhaiTra = 0;
+                var tienPhaiTra = 0;
+                var tongLai = 0; 
+
+                //xuất dữ liệu ra console để debug
+                console.log("Số tiền vay = " + soTienVayInput.value);
+                console.log("Thời gian vay = " + thoiGianVay);
+                console.log("Lãi suất vay = " + laiSuat);
+                console.log("Ngày giải ngân = " + ngayGiaiNganInput.value);
+            
+                function inHoaDon() {
+                    console.log('Lich Trinh');
+                    console.log(goc);
+                    console.log(laiSuat);
+                    console.log(thoiGianVay);
+                }
+                inHoaDon();
+
+
+                //chèn dữ liệu vào bảng (dòng đầu tiên)
+                //lấy đối tượng bảng
+                var tbodyRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+                //tạo một dòng mới
+                var newRow = tbodyRef.insertRow();
+                //thêm 1 ô vào bảng
+                var newCell01 = newRow.insertCell();
+                var newCell02 = newRow.insertCell();
+                var newCell03 = newRow.insertCell();
+                var newCell04 = newRow.insertCell();
+                var newCell05 = newRow.insertCell();
+                var newCell06 = newRow.insertCell();
+                var newText01 = document.createTextNode(newDate.toLocaleDateString());
+                var newText02 = document.createTextNode("0");
+                var newText03 = document.createTextNode(numberWithCommas(goc));
+                var newText04 = document.createTextNode("");
+                newCell01.appendChild(newText01);
+                newCell02.appendChild(newText02);
+                newCell03.appendChild(newText03);
+                newCell04.appendChild(newText04);
+                newCell05.appendChild(newText04);
+                newCell06.appendChild(newText04);
+
+                //tính toán và chèn dữ liệu vào các dòng còn lại của bảng
+                for (let i = 1; i <= thoiGianVay; i++) {
+                    //công thức tính lãi suất thầy cung cấp
+                    laiPhaiTra = Math.round(gocConLai * laiSuat);
+                    console.log("Lãi suất = " + laiSuat);
+                    console.log("gốc còn lại = " + gocConLai);
+                    
+                    tienPhaiTra = laiPhaiTra + gocHangThang;
+                    console.log("Tiền phải trả = " + tienPhaiTra);
+                    gocConLai = gocConLai - gocHangThang;
+                    tongLai = tongLai + laiPhaiTra;
+
+                    //deficit
+                    if (i == +thoiGianVay) {
+                        gocConLai = 0;
+                    }
+
+                    // chèn thêm row
+                    var tbodyRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+
+                    //Thêm một dòng vào bảng
+                    var newRow = tbodyRef.insertRow();
+                    //thêm nội dung ô
+                    var newCell1 = newRow.insertCell();
+                    var newCell2 = newRow.insertCell();
+                    var newCell3 = newRow.insertCell();
+                    var newCell4 = newRow.insertCell();
+                    var newCell5 = newRow.insertCell();
+                    var newCell6 = newRow.insertCell();
+                    // Append a text node to the cell
+                    newDate.setMonth(newDate.getMonth() + 1);
+                    var newText1 = document.createTextNode(newDate.toLocaleDateString());
+                    var newText2 = document.createTextNode(i);
+                    var newText3 = document.createTextNode(numberWithCommas(gocConLai));
+                    var newText4 = document.createTextNode(numberWithCommas(gocHangThang));
+                    var newText5 = document.createTextNode(numberWithCommas(laiPhaiTra));
+                    var newText6 = document.createTextNode(numberWithCommas(tienPhaiTra));
+                    newCell1.appendChild(newText1);
+                    newCell2.appendChild(newText2);
+                    newCell3.appendChild(newText3);
+                    newCell4.appendChild(newText4);
+                    newCell5.appendChild(newText5);
+                    newCell6.appendChild(newText6);
+                    
+                }
+
+                var tbodyRef = document.getElementById('myTable').getElementsByTagName('tbody')[0];
+                var newRow = tbodyRef.insertRow();
+                var newCell21 = newRow.insertCell();
+                var newCell22 = newRow.insertCell();
+                var newCell23 = newRow.insertCell();
+                var newCell24 = newRow.insertCell();
+                var newCell25 = newRow.insertCell();
+                var newCell26 = newRow.insertCell();
+                var newText21 = document.createTextNode("Tổng");
+                var newText22 = document.createTextNode("");
+                var newText24 = document.createTextNode(numberWithCommas(goc));
+                var newText25 = document.createTextNode(numberWithCommas(tongLai));
+                var newText26 = document.createTextNode(numberWithCommas(+goc + tongLai));
+                newCell21.appendChild(newText21);
+                newCell22.appendChild(newText22);
+                newCell23.appendChild(newText22);
+                newCell24.appendChild(newText24);
+                newCell25.appendChild(newText25);
+                newCell26.appendChild(newText26);
+
+                console.log("Tong goc: " + goc);
+                console.log("Tong lai: " + tongLai);
+                console.log(typeof(goc));
+                console.log(typeof(tongLai));
+                console.log("Tổng goc + lai: " + (+goc + tongLai));
+
+            //hàm định dạng chữ số có phân cách hàng nghìn
+            function numberWithCommas(x) {
+                x = x.toString();
+                var pattern = /(-?\d+)(\d{3})/;
+                while (pattern.test(x))
+                    x = x.replace(pattern, "$1,$2");
+                return x;
+            }
+            }      
+            displayAlready = false;
+        })
+
+        
+    </script>
+</body>
+</html>

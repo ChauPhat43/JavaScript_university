@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form>  
+        <label for="">Lãi suất</label>
+        <input type="text" id="laiSuat"/>
+        <p>% / năm</p>
+        <input type="button" value="cube" onclick="getcube()"/>  
+    </form>  
+    <script type="text/javascript">  
+        function getcube(){  
+            var laiSuatInput = document.getElementById("laiSuat");
+            var laiSuat = laiSuatInput.value/12;  
+        alert(laiSuat);  
+        }  
+    </script>  
+</body>
+</html>
+

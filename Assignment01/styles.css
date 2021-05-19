@@ -1,0 +1,52 @@
+.line {
+    padding: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+input {
+    margin-top: 5px;
+    font-size: 20px;
+}
+label {
+    font-size: 20px;
+}
+h3 {
+    font-size: 30px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.result1 {
+    margin-top: 10px;
+}
+body {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    font-family: 'Roboto', 'Segoe UI';
+    justify-content: center;
+    align-items: center;
+    background: #c2e59c;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #64b3f4, #c2e59c);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #64b3f4, #c2e59c); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+
+.container {
+    width: 400px;
+    height: 500px;
+    /* background-color: wheat; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}

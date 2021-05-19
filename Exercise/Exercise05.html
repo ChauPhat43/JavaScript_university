@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basic Exercises 05</title>
+</head>
+<body>
+    <div class="ex5">
+        <form action="#">
+            <h3>05. Viết chương trình nhập số nguyên dương a và kiểm tra a có phải là số tự đối xứng không?</h3>
+            <input type="text" id="checkEx5">
+            <button type="submit" class="submitEx5">Kiểm tra</button>
+            <div class="resEx3"></div>
+        </form>
+    </div>
+    <script>
+        var resEx3 = document.querySelector(".resEx3");
+        var buttonEx5 = document.querySelector("button.submitEx5");
+        var checkEx5 = true;
+        var number = 0;
+        var tong = 0;
+
+        buttonEx5.addEventListener("click", function(e) {
+            e.preventDefault();
+            var n = document.getElementById("checkEx5");
+            var mang = n.value.split("");
+            console.log(mang);
+            var number = mang.length;
+            console.log(number);
+            for (let i = 0; i < Math.floor(number/2); i++) {
+                console.log(mang[i] + " so với " + mang[number - 1 - i]);
+                if (mang[i] != mang[number - 1 - i])  {
+                    checkEx5 = false;
+                }
+                console.log(checkEx5);
+            }
+            if (checkEx5) {
+                resEx3.innerHTML = n.value + ' là chuỗi đối xứng'
+            } else {
+                resEx3.innerHTML = n.value + ' là chuỗi bất đối xứng'
+            }
+        })
+    </script>
+</body>
+</html>

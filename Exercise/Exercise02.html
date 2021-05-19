@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basic Exercises</title>
+    <link rel="stylesheet" href="Exercise02.css">
+</head>
+<body>
+    <form action="" id="form1" class="form">
+        <div class="animation-input">
+            <input type="number" name="user-input" class="user-input">
+            <div class="underline"></div>
+            <label for="">Nhập số phần tử của mảng: </label>
+        </div>
+        <button type="submit" class="form-submit">Tạo</button>
+    </form>
+
+    <form id="form2" class="form">
+        <div class="render"></div>
+        <button type="submit" class="form2-submit" disabled>Submit</button>
+    </form>
+    <div class="result">
+        <div class="res0"></div>
+        <div class="res1"></div>
+        <div class="res2"></div>
+        <div class="res3"></div>
+        <div class="res4"></div>
+        <div class="res5"></div>
+    </div>
+    <script>
+        // document.addEventListener('DOMContentLoaded', () => {
+        const input = document.querySelector('.user-input');
+        const form1SubmitBtn = document.querySelector('.form-submit');
+        const form2SubmitBtn = document.querySelector('.form2-submit');
+
+        var numberInput;
+        var arr = [];
+
+        input.addEventListener('change', (e) => {
+            numberInput = e.target.value;
+            console.log(numberInput);
+        });
+        form1SubmitBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            render();
+        })
+
+        function render(){
+            // convert input to arr from 1 to input
+            for (let i = 0; i < numberInput; i++) {
+                arr[i] = i;
+            }
+            // render components
+            const html = arr.map((index) => `
+            <div class="component">
+                <div class="animation-input">
+                    <input type="number" name='input${index}' class="render-input">
+                    <div class="underline"></div>
+                    <label for="">Nhập giá trị thứ ${index + 1} : </label>
+                </div>
+            </div>`
+            ).join('');
+            document.querySelector('.render').innerHTML = html;
+
+            // after render components, get DOM and add event to get values of input
+            var formValue = [];
+            // remove disable attribute for submit button
+            document.getElementsByClassName('form2-submit')[0].removeAttribute("disabled");
+            // query DOM and event
+            document.querySelectorAll('.render-submit');
+            var renderInputs =  document.querySelectorAll('.render-input');
+            console.log(renderInputs);
+            for (let i = 0; i < numberInput; i++) {
+                renderInputs[i].addEventListener('change', (e) => {
+                    console.log("Giá trị thứ " + i + " là: " + e.target.value);
+                    var obj = {index: i + 1, value: e.target.value}
+                    formValue.push(obj);
+                })
+                
+            }
+            // handle event for submit btn
+            form2SubmitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log(formValue);
+
+                //In các phần tử
+                var string = "[Bài 1 - câu 2] Các phần tử trong mảng là: ";
+                var res0 = document.getElementsByClassName("res0")[0];
+                for (let i = 0; i < formValue.length; i++) {
+                    string += formValue[i].value + ", "
+                }
+                string = string.slice(0, string.length-2)
+                res0.innerHTML = string;
+
+                //tìm số hoàn hảo
+                var string1 = "[Bài 1 - câu 4] Các số hoàn hảo trong mảng là: ";
+                var res1 = document.getElementsByClassName("res1")[0];
+                var exist = false;
+                var total = 0;
+                for (let i = 0; i < formValue.length; i++) {
+                    total = 0;
+                    let j = formValue[i].value;
+                    for (let k = 1; k < j; k++) {
+                        if (j % k == 0) {
+                            total += k;
+                        }
+                    }
+                    if (total == j && (j != 0) && (j != 1)) {
+                        string1 += j + ", ";
+                        exist = true;
+                    }
+                }
+                if (exist == false) {
+                    string1 += "Không có phần tử nào thỏa điều kiện này.  ";
+                }
+                string1 = string1.slice(0, string1.length-2);
+                res1.innerHTML = string1;
+
+                //sắp xếp mảng giảm dần
+                var string2 = "[Bài 2 - câu 11] Sắp xếp mảng tăng dần: ";
+                var res2 = document.getElementsByClassName("res2")[0];
+                
+                var mang = [numberInput];
+                for (let i = 0; i < formValue.length; i++) {
+                    mang[i] = formValue[i].value;
+                }
+                var arrLength = mang.length;
+                var temp;
+                for (let i = 0; i < arrLength - 1; i++) {
+                    for (let j = 0; j < arrLength - i - 1; j++) {
+                        if (+mang[j] > +mang[j + 1]) {
+                            // swap arr[j+1] và arr[i]
+                            temp = +mang[j];
+                            mang[j] = +mang[j + 1];
+                            mang[j + 1] = +temp;
+                        }
+                    }
+                }
+                // console.log(" mang da sap xep = " + mang.toString());
+                for (let i = 0; i < mang.length; i++) {
+                    string2 += mang[i] + ", ";
+                }
+                string2 = string2.slice(0, string2.length-2);
+                res2.innerHTML = string2;
+
+                //các phần tử chia hết cho 5
+                var string3 = "[Bài 2 - câu 12] Các phần tử chia hết cho 5: ";
+                var res3 = document.getElementsByClassName("res3")[0];
+                exist = false;
+                
+                for (let i = 0; i < arrLength; i++) {
+                    if (mang[i] % 5 == 0 && mang[i] != 0) {
+                        string3 += mang[i] + ", ";
+                        exist == true;
+                    }
+                    
+                }
+                if (exist == false) {
+                    string3 += "Không có phần tử nào thỏa điều kiện này.  ";
+                }
+                string3 = string3.slice(0, string3.length-2);
+                res3.innerHTML = string3;
+
+                //in các số nguyên tố
+                var string4 = "[Bài 2 - câu 13] Các số nguyên tố có trong mảng: ";
+                var res4 = document.getElementsByClassName("res4")[0];
+                exist = true;
+                var check = true;
+                
+                for (let i = 0; i < arrLength; i++) {
+                    check = true;
+                    for (let j = 2; j <= Math.ceil(Math.sqrt(+mang[i])); j++) {
+                        if (+mang[i] % j == 0) {
+                            check = false;
+                            exist = false;
+                        }
+                    }   
+                    if (check && +mang[i] > 0) {
+                        string4 += mang[i] + ", ";
+                    }                
+                }
+                if (exist == false) {
+                    string4 += "Không có phần tử nào thỏa điều kiện này.  ";
+                }
+                string4 = string4.slice(0, string4.length-2);
+                res4.innerHTML = string4;
+
+                //in các số chính phương
+                var string5 = "[Bài 2 - câu 15] Các số chính phương có trong mảng: ";
+                var res5 = document.getElementsByClassName("res5")[0];
+                var check = true;
+                exist = false;
+                
+                for (let i = 0; i < arrLength; i++) {
+                    check = false;
+                    for (let j = 1; j < mang[i]; j++) {
+                        if (mang[i] == j*j) {
+                            check = true;
+                        }
+                    }   
+                    if (check) {
+                        string5 += mang[i] + ", ";
+                        exist = true;
+                    }                
+                }
+                if (exist == false) {
+                    string5 += "Không có phần tử nào thỏa điều kiện này.  ";
+                }
+                string5 = string5.slice(0, string5.length-2);
+                res5.innerHTML = string5;
+            })
+        }
+    </script>
+</body>
+</html>
