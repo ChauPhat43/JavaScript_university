@@ -46,53 +46,62 @@
             </form>
         </div>
     
-        <div class="ex5">
+        <div class="Ex3">
             <form action="#">
                 <h3>05. Viết chương trình nhập số nguyên dương a và kiểm tra a có phải là số tự đối xứng không?</h3>
-                <input type="text" id="checkEx5">
-                <button type="submit" class="submitEx5">Kiểm tra</button>
+                <input type="text" id="checkEx3">
+                <button type="submit" class="submitEx3">Kiểm tra</button>
                 <div class="resEx3 res"></div>
             </form>
         </div>
     
-        <div class="ex16">
+        <div class="Ex4">
             <form action="#">
                 <h3>Viết chương trình nhập vào số nguyên N và sau đó in ra số đảo của N? 
                 Ví dụ: N=12345. In ra 54321.</h3>
-                <input type="number" id="checkEx16">
-                <button type="submit" class="submitEx16">Kiểm tra</button>
-                <div class="resEx16 res"></div>
+                <input type="number" id="checkEx4">
+                <button type="submit" class="submitEx4">Kiểm tra</button>
+                <div class="resEx4 res"></div>
             </form>
         </div>
     </div>
     <script>
+
+        //bài 1
         var n = document.getElementById("checkEx1");
         var resEx1 = document.querySelector(".resEx1");
-        var button = document.querySelector("button.submitEx1");
-        var checkEx1 = true
-        var number;
+        var buttonEx1 = document.querySelector("button.submitEx1");
+        var checkEx1;
+        var numberEx1;
 
-        n.addEventListener("change", function(e) {
-            number = e.target.value;
-        })
+        // n.addEventListener("change", function(e) {
+        //     numberEx1 = +e.target.value;
+        //     console.log(n.value);
+        // })
 
-        button.addEventListener("click", function(e) {
+        buttonEx1.addEventListener("click", function(e) {
             e.preventDefault();
-            for (let i = 2; i < Math.sqrt(number); i++) {
-                if (number % i == 0)  {
-                    checkEx1 = false
+            numberEx1 = n.value;
+            check = true;
+            console.log("numberEx1 =" + numberEx1);
+            for (let i = 2; i <= Math.sqrt(numberEx1); i++) {
+                if (numberEx1 % i == 0)  {
+                    console.log("i = " + i);
+                    checkEx1 = false;
                 }
             }
             if (checkEx1) {
-                resEx1.innerHTML = number + ' là số nguyên tố'
+                resEx1.innerHTML = numberEx1 + ' là số nguyên tố'
             } else {
-                resEx1.innerHTML = number + ' không là số nguyên tố'
+                resEx1.innerHTML = numberEx1 + ' không là số nguyên tố'
             }
+            checkEx1 = true;
         })
 
+        //Bài 2
         var resEx2 = document.querySelector(".resEx2");
         var buttonEx2 = document.querySelector("button.submitEx2");
-        var checkEx2 = true
+        var checkEx2 = true;
         var number = 0;
         var tong = 0;
 
@@ -109,63 +118,70 @@
             console.log("Tong la: " ,tong);
             console.log("Number là: ",number)
             if (tong === +number) {
-                resEx2.innerHTML = number + ' là số hoàn hảo'
+                resEx2.innerHTML = number + ' là số hoàn hảo';
             } else {
-                resEx2.innerHTML = number + ' không là số hoàn hảo'
+                resEx2.innerHTML = number + ' không là số hoàn hảo';
             }
         })
 
-
+        //Bài 3
         var resEx3 = document.querySelector(".resEx3");
-        var buttonEx5 = document.querySelector("button.submitEx5");
-        var checkEx5 = true;
-        var number = 0;
+        var buttonEx3 = document.querySelector("button.submitEx3");
+        var checkEx3 = true;
+        var numberEx3 = 0;
         var tong = 0;
 
-        buttonEx5.addEventListener("click", function(e) {
+        buttonEx3.addEventListener("click", function(e) {
             e.preventDefault();
-            var n = document.getElementById("checkEx5");
+            var n = document.getElementById("checkEx3");
             var mang = n.value.split("");
             console.log(mang);
-            var number = mang.length;
-            console.log(number);
-            for (let i = 0; i < Math.floor(number/2); i++) {
-                console.log(mang[i] + " so với " + mang[number - 1 - i]);
-                if (mang[i] != mang[number - 1 - i])  {
-                    checkEx5 = false;
+            var numberEx3 = mang.length;
+            console.log(numberEx3);
+            for (let i = 0; i < Math.floor(numberEx3/2); i++) {
+                console.log(mang[i] + " so với " + mang[numberEx3 - 1 - i]);
+                if (mang[i] != mang[numberEx3 - 1 - i])  {
+                    checkEx3 = false;
                 }
-                console.log(checkEx5);
+                console.log(checkEx3);
             }
-            if (checkEx5) {
+            if (checkEx3) {
                 resEx3.innerHTML = n.value + ' là chuỗi đối xứng'
             } else {
                 resEx3.innerHTML = n.value + ' là chuỗi bất đối xứng'
             }
         })
 
-        var resEx16 = document.querySelector(".resEx16");
-        var buttonEx16 = document.querySelector("button.submitEx16");
-        var checkEx16 = true;
-        var number = 0;
-        var tong = 0;
+        //Bài 4
+        var resEx4 = document.querySelector(".resEx4");
+        var buttonEx4 = document.querySelector("button.submitEx4");
+        var checkEx4 = true;
+        var numberEx4 = 0;
         var reversedString = "";
 
-        buttonEx16.addEventListener("click", function(e) {
+        buttonEx4.addEventListener("click", function(e) {
             e.preventDefault();
-            var n = document.getElementById("checkEx16");
+
+            var n = document.getElementById("checkEx4");
+            //tách các chữ số ra và gán vào một mảng
             var mang = n.value.split("");
             console.log(mang);
+
+            //tạo một mảng lưu kết quả đảo ngược vào lấy độ dài mảng gốc
             var mangDaoNguoc = [];
-            var number = mang.length;
+            var numberEx4 = mang.length;
+
+            //tạo biến đếm ngược và lặp để "hứng" giá trị của mảng
             var count = 0;
-            for (let i = number-1; i >= 0; i--) {
+            for (let i = numberEx4-1; i >= 0; i--) {
                 mangDaoNguoc[count] = mang[i];
                 count++;
             }
             for (let i = 0; i < mangDaoNguoc.length; i++) {
                 reversedString += mangDaoNguoc[i]
             }
-            resEx16.innerHTML = reversedString;
+            resEx4.innerHTML = reversedString;
+            reversedString = "";
         })
     </script>
 </body>

@@ -30,7 +30,6 @@
         <div class="res5"></div>
     </div>
     <script>
-        // document.addEventListener('DOMContentLoaded', () => {
         const input = document.querySelector('.user-input');
         const form1SubmitBtn = document.querySelector('.form-submit');
         const form2SubmitBtn = document.querySelector('.form2-submit');
@@ -38,21 +37,27 @@
         var numberInput;
         var arr = [];
 
+        //lấy ra số n là số ô người dùng muốn tạo
         input.addEventListener('change', (e) => {
             numberInput = e.target.value;
             console.log(numberInput);
         });
+        //khi click vào nút tạo thì gọi hàm render()
         form1SubmitBtn.addEventListener('click', (e) => {
             e.preventDefault();
             render();
         })
 
+        //hàm render để tạo ra các ô input để người dùng nhập vào
         function render(){
             // convert input to arr from 1 to input
+            // tạo ra mảng chứa các số từ 0 -> số người dùng nhập vào để dùng được hàm map()
             for (let i = 0; i < numberInput; i++) {
                 arr[i] = i;
             }
             // render components
+            // map() để biến một phần tử trong mảng thành một khối HTML
+            // index là một phần tử của mảng
             const html = arr.map((index) => `
             <div class="component">
                 <div class="animation-input">
@@ -69,12 +74,13 @@
             // remove disable attribute for submit button
             document.getElementsByClassName('form2-submit')[0].removeAttribute("disabled");
             // query DOM and event
-            document.querySelectorAll('.render-submit');
+            //lấy tất cả đối tượng ô input vừa render ra và gắn cho chúng sự kiện
             var renderInputs =  document.querySelectorAll('.render-input');
             console.log(renderInputs);
             for (let i = 0; i < numberInput; i++) {
                 renderInputs[i].addEventListener('change', (e) => {
                     console.log("Giá trị thứ " + i + " là: " + e.target.value);
+                    //lấy giá trị của ô input đó chèn vào mảng
                     var obj = {index: i + 1, value: e.target.value}
                     formValue.push(obj);
                 })
@@ -153,9 +159,8 @@
                 for (let i = 0; i < arrLength; i++) {
                     if (mang[i] % 5 == 0 && mang[i] != 0) {
                         string3 += mang[i] + ", ";
-                        exist == true;
+                        exist = true;
                     }
-                    
                 }
                 if (exist == false) {
                     string3 += "Không có phần tử nào thỏa điều kiện này.  ";
@@ -166,7 +171,7 @@
                 //in các số nguyên tố
                 var string4 = "[Bài 2 - câu 13] Các số nguyên tố có trong mảng: ";
                 var res4 = document.getElementsByClassName("res4")[0];
-                exist = true;
+                // exist = true;
                 var check = true;
                 
                 for (let i = 0; i < arrLength; i++) {
@@ -174,14 +179,14 @@
                     for (let j = 2; j <= Math.ceil(Math.sqrt(+mang[i])); j++) {
                         if (+mang[i] % j == 0) {
                             check = false;
-                            exist = false;
+                            // exist = false;
                         }
                     }   
                     if (check && +mang[i] > 0) {
                         string4 += mang[i] + ", ";
                     }                
                 }
-                if (exist == false) {
+                if (string4 == "") {
                     string4 += "Không có phần tử nào thỏa điều kiện này.  ";
                 }
                 string4 = string4.slice(0, string4.length-2);

@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JavaScript Buổi 2</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="Assignment01.css">
 </head>
 <body>
     <div class="container">
@@ -13,11 +13,11 @@
         <form class="form">
             <div class="line">
                 <label for="">Height: (in cm)</label>  
-                <input type="number" class="weight">
+                <input type="number" class="height">
             </div>
             <div class="line">
                 <label for="">Weight: (in kg)</label> <br>    
-                <input type="number" class="height">
+                <input type="number" class="weight">
             </div>
             <input type="submit" value="Calculate">
         </form>
@@ -25,22 +25,28 @@
         <div class="result2"></div>
     </div>
     <script>
+        //Lấy các DOM HTML
         var button = document.querySelector("input[type='submit']");
         var weight = document.querySelector("input.weight");
         var height = document.querySelector("input.height");
         var result1 = document.querySelector(".result1");
         var result2 = document.querySelector(".result2");
+        //khởi tạo các biến
         var weight1 = 0;
         var height1 = 0;
         var bmi = 0;
 
-        console.log(button);
+        //bắt sự kiện: Khi button được click thì tính BMI rồi xuất ra màn hình
         button.addEventListener("click", function(e) {
+            //chặn mặc định: tự động load lại trang
             e.preventDefault();
             console.log(weight1);
             console.log(height1);
 
-            bmi = (weight1 / (height1*height1/10000));
+            //tính BMI theo công thức
+            bmi = (weight1 / (height1*height1));
+            console.log(bmi);
+            //So sánh các khoảng giá trị và đưa ra kết quả
             if (bmi < 18.5) {
                 result1.innerHTML = "Phân loại: Gầy";
                 result2.innerHTML = "Nguy cơ phát triển bệnh: Thấp";
@@ -67,15 +73,16 @@
             }
         })
 
+        //lấy giá trị ô input khi người dùng nhập
         weight.addEventListener("change", function(e) {
-            weight1 = e.target.value;
+            weight1 = +e.target.value;
         })
         
         height.addEventListener("change", function(e) {
-            height1 = e.target.value;
+            height1 = +e.target.value/100;
         })
         
-        console.log(weight.target.value);
+        // console.log(weight.target.value);
     </script>
 </body>
 </html>
