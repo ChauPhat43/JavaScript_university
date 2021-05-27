@@ -54,13 +54,13 @@
     <script type="text/javascript">
         //lấy dữ liệu nút tính
         var submit = document.getElementById("submit");
-        var displayAlready = true;
+        var displayAlready = false;
 
         //đặt sự kiện nút Tính
         submit.addEventListener("click", (e) => {
             // ngăn load lại trang
             e.preventDefault();
-            if (displayAlready) {
+            if (displayAlready == false) {
                 //lấy dữ liệu các nút trong form HTML
                 var soTienVayInput = document.getElementById("soTien");
                 var ngayGiaiNganInput = document.getElementById("ngayGiaiNgan");
@@ -203,7 +203,7 @@
                 return x;
             }
             }      
-            displayAlready = false;
+            displayAlready = true;
         })
 
         

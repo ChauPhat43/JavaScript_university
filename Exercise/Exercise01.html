@@ -71,7 +71,7 @@
         var n = document.getElementById("checkEx1");
         var resEx1 = document.querySelector(".resEx1");
         var buttonEx1 = document.querySelector("button.submitEx1");
-        var checkEx1;
+        var checkEx1 = true;
         var numberEx1;
 
         // n.addEventListener("change", function(e) {
@@ -82,7 +82,6 @@
         buttonEx1.addEventListener("click", function(e) {
             e.preventDefault();
             numberEx1 = n.value;
-            check = true;
             console.log("numberEx1 =" + numberEx1);
             for (let i = 2; i <= Math.sqrt(numberEx1); i++) {
                 if (numberEx1 % i == 0)  {

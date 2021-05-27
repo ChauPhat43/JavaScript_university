@@ -62,7 +62,7 @@ function sapXepSVTheoDiemTichLuyDESC(arr) {
     if ( a.mark > b.mark ){
       return -1;
     }
-    if ( a.mark > b.mark ){
+    if ( a.mark < b.mark ){
       return 1;
     }
     return 0;
